@@ -1,4 +1,4 @@
-INSERT INTO byb_traits (trait, tagline) 
+INSERT INTO traits (trait, tagline) 
 VALUES
 ("Humility", "Take up the right amount of space"), 
 ("Patience",	"This moment also is okay"), 
