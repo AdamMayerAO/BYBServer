@@ -84,7 +84,7 @@ usersRouter
         } else if(user.password === password) {
             let accessToken = jwt.sign({email}, process.env.ACCESS_TOKEN_SECRET, {
                 algorithm: "HS256",
-                expiresIn: process.env.ACCESS_TOKEN_LIFE
+                expiresIn: 10000
             });
         
             //create the refresh token with the longer lifespan
