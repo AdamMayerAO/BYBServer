@@ -2,7 +2,6 @@ const jwt = require('jsonwebtoken');
 
 exports.verify = function(req, res, next){
     let accessToken = req.header('Authorization');
-    console.log("\n\n Access Token: ", accessToken, "\n\n")
     //if there is no token stored in header, the request is unauthorized
     if (!accessToken){
         return res.status(403).send()

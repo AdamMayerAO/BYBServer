@@ -1,25 +1,24 @@
 //Replace all 'noteful_notes' with the new database name
 const notesService = {
-    getAllNotes(knex) {
+    getAllNotes(knex, user_id) {
       return knex
       .select('*')
       .from('notes')
+      .where('user_id', user_id)
     },
     getById(knex, id) {
       return knex
-      .from('notes')
       .select('*')
+      .from('notes')
       .where('id', id)
       .first()
     },
-    getByFolder(knex, folderId){
-        return knex
-        .from('notes')
-        .select('*')
-       // .where('noteful_folder', folderId)
-        .first()
+    getUserNotesByFolderId(knex, user_id, folder_id) {
+      return knex
+      .select('*')
+      .from('notes')
+      .where({user_id, folder_id})
     },
-
     addNote(knex, newNote) {
       return knex
         .insert(newNote)
@@ -29,9 +28,9 @@ const notesService = {
           return rows[0]
         })
     },
-    deleteNote(knex, id) {
+    deleteNote(knex, note_id, user_id) {
       return knex('notes')
-        .where({ id })
+        .where({ id: note_id, user_id })
         .delete()
     },
   }

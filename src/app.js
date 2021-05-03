@@ -10,6 +10,7 @@ const app = express()
 const notesRouter = require('./notes-router')
 const usersRouter = require('./users-router')
 const traitsRouter = require('./traits-router')
+const foldersRouter = require('./folders-router')
 const morganOption = (NODE_ENV === 'production')
   ? 'tiny'
   : 'common';
@@ -24,6 +25,7 @@ app.use(cookieParser())
 app.use('/notes', notesRouter)
 app.use('/user', usersRouter)
 app.use('/traits', traitsRouter)
+app.use('/folders', foldersRouter)
 app.get('/', (req, res) => {
     res.send("Hello, world")
 });
