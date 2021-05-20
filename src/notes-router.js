@@ -98,6 +98,32 @@ notesRouter
 //   .get(verify, (req, res) => {
 //     res.json(serializeNote(res.note))
 //   })
+notesRouter
+  .route('/search')
+  .post(verify, (req, res, next) => {
+    const knexInstance = req.app.get('db');
+    const { keyword } = req.body;
+    let accessToken = req.header('authorization');
+    let data = jwt.decode(accessToken);
+    usersService.getUserByEmail(req.app.get('db'), data.email)
+    .then(user => {
+      if (user) {
+        notesService.searchNotes(knexInstance, user.id, keyword)
+        .then(notes => {
+          return res.status(200).json({
+            notes: notes.map(serializeNote),
+            message: `Notes searched successfully!`
+          });
+        })
+      } else {
+        return res.status(404).json({
+          message: `An error occurred while fetching user details!`
+        })
+      }
+    })
+    .catch(next)
+  })
+
 
 notesRouter
   .route('/by-folder')

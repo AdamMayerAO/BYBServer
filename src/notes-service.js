@@ -6,6 +6,13 @@ const notesService = {
       .from('notes')
       .where('user_id', user_id)
     },
+    searchNotes(knex, user_id, keyword){
+      return knex
+      .select('*')
+      .from('notes')
+      .where('user_id', user_id)
+      .where('contents', 'like', `%${keyword}%`)
+    },
     getById(knex, id) {
       return knex
       .select('*')
