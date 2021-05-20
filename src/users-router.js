@@ -68,7 +68,10 @@ usersRouter
               })
         }
       })
-      .catch(next)
+      .catch((error)=>{
+        console.log("\n Login Error: ", error);
+        next
+      })
   })
 
 usersRouter
