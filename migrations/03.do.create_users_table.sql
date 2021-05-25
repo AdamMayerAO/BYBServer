@@ -4,7 +4,6 @@ CREATE TABLE users (
     lastName TEXT NOT NULL,
     email TEXT NOT NULL,
     password TEXT NOT NULL
-    
 );
 
 /*AES_ENCRYPT() function built into mysql for greater security

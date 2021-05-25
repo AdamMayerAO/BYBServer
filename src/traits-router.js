@@ -58,6 +58,7 @@ traitsRouter
   .route('/add-user-trait')
   .post(verify, (req, res, next) => {
     const { trait } = req.body;
+    console.log(trait)
     const knexInstance = req.app.get('db');
     let accessToken = req.header('authorization');
     let data = jwt.decode(accessToken);

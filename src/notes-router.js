@@ -135,6 +135,7 @@ notesRouter
     usersService.getUserByEmail(req.app.get('db'), data.email)
     .then(user => {
       if (user) {
+        
         notesService.getUserNotesByFolderId(knexInstance, user.id, folderId)
         .then(notes => {
           return res.status(200).json({
