@@ -46,8 +46,7 @@ notesRouter
   .route('/add-note')
   .post(verify, (req, res, next) => {
     const { noteType, contents, folderId } = req.body;
-    const newNote = { note_type: noteType, contents, folder_id: folderId}
-    console.log({newNote})
+    const newNote = { noteType: noteType, contents, folder_id: folderId}
     for (const [key, value] of Object.entries(newNote)) {
         if (value == null) {
           return res.status(400).json({
@@ -135,7 +134,7 @@ notesRouter
     usersService.getUserByEmail(req.app.get('db'), data.email)
     .then(user => {
       if (user) {
-        
+
         notesService.getUserNotesByFolderId(knexInstance, user.id, folderId)
         .then(notes => {
           return res.status(200).json({
